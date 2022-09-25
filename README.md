@@ -6,9 +6,13 @@
 - Pagination with Paging 3
 - Multi-module gradle projects for scalability
 - Created base modules for ui layer, domain layer and data layer
+
+## Major Libraries
+- UI: XMLs
 - DI: Hilt
 - Image Loading: Glide
 - Network: Okhttp and Retrofit
+- Parsing: Moshi with kapt
 
 ## Unit Testing
 - Mockk for testing of ViewModel, Domain layer and Data layer
@@ -24,7 +28,8 @@
   - Code is present in: com.home.presentation.activities.HomeActivity scrollListener
 
 ## Gradle
-- Created different gradle files for to reduce redundant code
+- Created different gradle files to reduce redundant code
+- Its present in buildconfig folder 
 
 ## Caching
 - This app is relying on HTTP Caching
@@ -37,6 +42,9 @@
 - User can initiate search from keyboard
 - If user has entered new query then search results will appear from top
 - If user presses search button again then PagingAdapter.refresh call will invoke 
+
+## Screenshots
+
 
 ## Things I did not do
 - Testing
