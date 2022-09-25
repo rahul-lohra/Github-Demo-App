@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1056372593,
+    "state": "closed",
+    "title": "Migrate more tests to XProcessing testing APIs.",
+    "user": {
+      "login": "copybara-service[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/44061?v=4"
+    },
+    "created_at": "2022-09-14T17:40:56Z",
+    "closed_at": "2022-09-14T18:15:54Z"
+  },
+  {
+    "id": 1056239440,
+    "state": "closed",
+    "title": "Migrate more tests to XProcessing testing APIs.",
+    "user": {
+      "login": "copybara-service[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/44061?v=4"
+    },
+    "created_at": "2022-09-14T15:37:57Z",
+    "closed_at": "2022-09-14T16:05:20Z"
+  }
+]

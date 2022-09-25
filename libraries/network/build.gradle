@@ -1,0 +1,31 @@
+plugins {
+    id 'com.android.library'
+    id 'dagger.hilt.android.plugin'
+}
+
+apply from: "$rootProject.projectDir/buildconfig/kotlin/module.gradle"
+apply from: "$rootProject.projectDir/buildconfig/dependencies/dependencies.gradle"
+
+dependencies {
+    implementation androidx.coreKtx
+    implementation network.retrofit
+    implementation network.okhttp
+    implementation network.converterMoshi
+
+    implementation parsers.moshiKotlin
+    kapt parsers.moshiKotlinCodegen
+
+    implementation jetbrains.coroutinesCore
+    implementation di.javaxInject
+    implementation androidx.paging
+
+    implementation di.hilt
+    kapt di.hiltCompiler
+    implementation network.okHttploggingInterceptor
+    implementation project(rootProject.network.github)
+
+    testImplementation unitTesting.junit
+    testImplementation unitTesting.mockk
+    testImplementation unitTesting.coroutinesTest
+    testImplementation unitTesting.kotlinTest
+}

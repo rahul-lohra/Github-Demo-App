@@ -1,0 +1,56 @@
+ext {
+
+    def hilt = '2.40.5'
+
+    def okHttp = '4.10.0'
+    def retrofit = '2.9.0'
+
+    def ktx = "1.8.0"
+    def appcompat = "1.4.2"
+    def constraintlayout = "2.1.4"
+    def lifecyclerViewmodelKtx = "2.5.1"
+    def recyclerview = "1.2.1"
+
+    def junit = "4.13.2"
+    def moshi = "1.13.0"
+    def coroutines = "1.6.4"
+
+    di = [
+            hilt        : "com.google.dagger:hilt-android:$hilt",
+            hiltCompiler: "com.google.dagger:hilt-android-compiler:$hilt",
+            javaxInject : "javax.inject:javax.inject:1",
+    ]
+    network = [
+            okhttp                  : "com.squareup.okhttp3:okhttp:$okHttp",
+            retrofit                : "com.squareup.retrofit2:retrofit:$retrofit",
+            converterMoshi          : "com.squareup.retrofit2:converter-moshi:$retrofit",
+            okHttploggingInterceptor: "com.squareup.okhttp3:logging-interceptor:4.10.0"
+    ]
+    androidx = [
+            coreKtx               : "androidx.core:core-ktx:$ktx",
+            appcompat             : "androidx.appcompat:appcompat:$appcompat",
+            constraintlayout      : "androidx.constraintlayout:constraintlayout:$constraintlayout",
+            lifecyclerViewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecyclerViewmodelKtx",
+            fragmentKtx           : "androidx.fragment:fragment-ktx:1.5.2",
+            recyclerview          : "androidx.recyclerview:recyclerview:$recyclerview",
+            paging                : "androidx.paging:paging-runtime:3.1.1",
+    ]
+    unitTesting = [
+            junit         : "junit:junit:$junit",
+            mockk         : "io.mockk:mockk:1.12.8",
+            coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4",
+            turbine       : "app.cash.turbine:turbine:0.11.0",
+            mockWebServer : "com.squareup.okhttp3:mockwebserver:4.10.0",
+            kotlinTest    : "org.jetbrains.kotlin:kotlin-test"
+    ]
+    parsers = [
+            moshiKotlin       : "com.squareup.moshi:moshi-kotlin:$moshi",
+            moshiKotlinCodegen: "com.squareup.moshi:moshi-kotlin-codegen:$moshi",
+    ]
+    jetbrains = [
+            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines",
+    ]
+    others = [
+            glide: "com.github.bumptech.glide:glide:4.13.2"
+    ]
+}

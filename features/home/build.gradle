@@ -1,0 +1,35 @@
+plugins {
+    id("dagger.hilt.android.plugin")
+}
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/buildconfig/kotlin/module.gradle"
+apply from: "$rootProject.projectDir/buildconfig/dependencies/dependencies.gradle"
+
+android {
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation androidx.coreKtx
+    implementation androidx.appcompat
+    implementation androidx.recyclerview
+    implementation androidx.constraintlayout
+    implementation androidx.fragmentKtx
+    implementation others.glide
+    implementation di.javaxInject
+
+    implementation project(rootProject.libraries.core)
+    implementation project(rootProject.libraries.domain)
+    implementation project(rootProject.libraries.network)
+    implementation project(rootProject.network.github)
+    implementation androidx.paging
+    implementation di.hilt
+    kapt di.hiltCompiler
+
+    testImplementation unitTesting.junit
+    testImplementation unitTesting.mockk
+    testImplementation unitTesting.coroutinesTest
+    testImplementation unitTesting.turbine
+}

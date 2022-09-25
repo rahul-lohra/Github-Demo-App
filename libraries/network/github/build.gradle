@@ -1,0 +1,18 @@
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/buildconfig/kotlin/module.gradle"
+apply from: "$rootProject.projectDir/buildconfig/dependencies/dependencies.gradle"
+
+dependencies {
+    implementation androidx.coreKtx
+    implementation parsers.moshiKotlin
+    kapt parsers.moshiKotlinCodegen
+    implementation jetbrains.coroutinesCore
+    implementation network.retrofit
+
+    testImplementation unitTesting.junit
+    testImplementation unitTesting.mockk
+    testImplementation unitTesting.coroutinesTest
+    testImplementation unitTesting.mockWebServer
+    testImplementation network.converterMoshi
+
+}

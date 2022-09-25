@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_enter_repo">Enter repo</string>
+    <string name="home_enter_owner">Enter Owner</string>
+    <string name="home_search">Search</string>
+    <string name="home_default_owner">google</string>
+    <string name="home_default_repo">dagger</string>
+</resources>

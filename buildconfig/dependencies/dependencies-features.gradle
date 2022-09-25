@@ -1,0 +1,14 @@
+ext {
+    features = [
+            home: ":features:home",
+    ]
+
+    libraries = [
+            core   : ":libraries:core",
+            network: ":libraries:network",
+            domain : ":libraries:domain",
+    ]
+    network = [
+            github: ":libraries:network:github"
+    ]
+}
