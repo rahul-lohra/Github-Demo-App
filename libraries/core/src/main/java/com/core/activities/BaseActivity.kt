@@ -1,4 +1,4 @@
-package com.network.presentation
+package com.core.activities
 
 import androidx.appcompat.app.AppCompatActivity
 

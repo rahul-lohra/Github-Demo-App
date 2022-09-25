@@ -2,6 +2,7 @@ package com.home.presentation.activities
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -9,13 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.core.KeyboardUtils.hideKeyboard
+import com.core.activities.ScrollingActivity
 import com.home.databinding.HomeActivityHomeBinding
+import com.home.presentation.adapters.HomeAdapter
 import com.home.presentation.data.UiAction
 import com.home.presentation.data.UiState
-import com.home.presentation.adapters.HomeAdapter
 import com.home.presentation.viewmodels.HomeViewModel
-import com.network.presentation.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -23,26 +24,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeActivity : BaseActivity() {
+class HomeActivity : ScrollingActivity() {
 
     private lateinit var binding: HomeActivityHomeBinding
     private val viewModel: HomeViewModel by viewModels()
+
     @Inject
     lateinit var adapter: HomeAdapter
     private lateinit var layoutManager: LinearLayoutManager
-
-    private val scrollListener = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                val isLastItemVisible = layoutManager
-                    .findLastVisibleItemPosition() == adapter.itemCount - 1
-                if (isLastItemVisible) {
-                    viewModel.sendUiAction(UiAction.Retry)
-                }
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +39,7 @@ class HomeActivity : BaseActivity() {
         setContentView(binding.root)
 
         setupRv()
-        setClickListeners()
+        setListeners()
         observeFlows()
     }
 
@@ -74,7 +63,7 @@ class HomeActivity : BaseActivity() {
                         is UiState.Retry -> {
                             adapter.retry()
                         }
-                        is UiState.Initial->{}
+                        is UiState.Initial -> {}
                     }
                 }
             }
@@ -90,23 +79,14 @@ class HomeActivity : BaseActivity() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 adapter.loadStateFlow.distinctUntilChanged().collectLatest {
-                    handleErrors(it.append)
-                    handleErrors(it.refresh)
+                    handlePagingErrorErrors(it.append)
+                    handlePagingErrorErrors(it.refresh)
                 }
             }
         }
     }
 
-    private fun addListenerToCheckIsLastItemVisibleOnRecyclerView() {
-        removeListenerToCheckIsLastItemVisibleOnRecyclerView()
-        binding.rv.addOnScrollListener(scrollListener)
-    }
-
-    private fun removeListenerToCheckIsLastItemVisibleOnRecyclerView() {
-        binding.rv.removeOnScrollListener(scrollListener)
-    }
-
-    private fun handleErrors(state: LoadState) {
+    private fun handlePagingErrorErrors(state: LoadState) {
         when (state) {
             is LoadState.Error -> {
                 addListenerToCheckIsLastItemVisibleOnRecyclerView()
@@ -123,14 +103,35 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-    private fun setClickListeners() {
-        binding.btn.setOnClickListener {
-//            viewModel.sendTestEvents()
-            viewModel.sendUiAction(
-                UiAction.Search(
-                    binding.etOwner.text.toString(), binding.etRepo.text.toString()
-                )
+    private fun sendSearchAction() {
+        binding.btn.hideKeyboard(this.window)
+
+        viewModel.sendUiAction(
+            UiAction.Search(
+                binding.etOwner.text.toString(), binding.etRepo.text.toString()
             )
+        )
+    }
+
+    private fun setListeners() {
+        binding.btn.setOnClickListener {
+            sendSearchAction()
+        }
+
+        binding.etOwner.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                sendSearchAction()
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+
+        binding.etRepo.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                sendSearchAction()
+                return@setOnEditorActionListener true
+            }
+            false
         }
     }
 
@@ -162,8 +163,7 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-    override fun onDestroy() {
-        removeListenerToCheckIsLastItemVisibleOnRecyclerView()
-        super.onDestroy()
-    }
+    override fun getRecyclerView() = binding.rv
+
+    override fun performRetryActionFromRecyclerView() = viewModel.sendUiAction(UiAction.Retry)
 }

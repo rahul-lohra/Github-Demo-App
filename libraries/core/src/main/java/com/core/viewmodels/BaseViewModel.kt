@@ -1,4 +1,4 @@
-package com.network.presentation
+package com.core.viewmodels
 
 import androidx.lifecycle.ViewModel
 

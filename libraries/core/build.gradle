@@ -5,5 +5,8 @@ apply from: "$rootProject.projectDir/buildconfig/dependencies/dependencies.gradl
 dependencies {
     implementation androidx.coreKtx
     implementation androidx.appcompat
+    implementation androidx.recyclerview
+    implementation jetbrains.coroutinesCore
+    implementation androidx.fragmentKtx
 
 }

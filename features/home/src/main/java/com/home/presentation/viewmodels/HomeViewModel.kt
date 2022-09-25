@@ -12,9 +12,10 @@ import com.home.presentation.data.UiListItem
 import com.home.presentation.data.UiState
 import com.home.presentation.mappers.UiMapper
 import com.home.presentation.paging.PagingSourceUtil
-import com.network.presentation.BaseViewModel
+import com.core.viewmodels.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -79,13 +80,14 @@ class HomeViewModel @Inject constructor(
     fun handleSearchAction(owner: String, repo: String) {
         viewModelScope.launch(io) {
             uiStateFlow.emit(UiState.Loading("Loading"))
-
+            delay(1000)
             if (isRefreshing(owner, repo)) {
                 uiStateFlow.emit(UiState.Refresh)
                 return@launch
             } else {
                 updateSavedState(owner, repo)
             }
+            pullRequestsFlow.emit(PagingData.empty())
             loadPaginatedData(owner, repo)
         }
     }
@@ -113,5 +115,4 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
 }
