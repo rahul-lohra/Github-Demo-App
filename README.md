@@ -45,6 +45,11 @@
 
 ## Screenshots
 
+<img src="https://github.com/rahul-lohra/Github-Demo-App/blob/master/screenshots/initial_screen.PNG?raw=true" align="left" width="240" >
+<img src="https://github.com/rahul-lohra/Github-Demo-App/blob/master/screenshots/loading_screen.PNG?raw=true" align="left" width="240" >
+<img src="https://github.com/rahul-lohra/Github-Demo-App/blob/master/screenshots/success_state.PNG?raw=true" align="left" width="240" >
+<img src="https://github.com/rahul-lohra/Github-Demo-App/blob/master/screenshots/error_state.PNG?raw=true" align="left" width="240" >
+<img src="https://github.com/rahul-lohra/Github-Demo-App/blob/master/screenshots/network_error_state.PNG?raw=true" width="240" >
 
 ## Things I did not do
 - Testing
