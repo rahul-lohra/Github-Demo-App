@@ -51,6 +51,8 @@
 <img src="https://github.com/rahul-lohra/Github-Demo-App/blob/master/screenshots/error_state.PNG?raw=true" align="left" width="240" >
 <img src="https://github.com/rahul-lohra/Github-Demo-App/blob/master/screenshots/network_error_state.PNG?raw=true" width="240" >
 
+https://user-images.githubusercontent.com/9371518/192169802-7ac46160-84f8-4594-9f1a-eb42761f0be4.mp4
+
 ## Things I did not do
 - Testing
   - Test init block of com.home.presentation.viewmodels.HomeViewModel
